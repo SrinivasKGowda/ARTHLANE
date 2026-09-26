@@ -1,0 +1,40 @@
+spring:
+  application:
+    name: arthlane-backend
+  datasource:
+    url: jdbc:h2:file:./data/arthlane;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE;DEFAULT_NULL_ORDERING=HIGH
+    username: sa
+    password: ""
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: none
+
+server:
+  port: ${PORT:8766}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+  health:
+    mail:
+      enabled: false
+
+arthlane:
+  jwt:
+    secret: ${ARTHLANE_JWT_SECRET:dev-only-secret-change-me-before-deploying-0001}
+    access-ttl: 15m
+    refresh-ttl: 30d
+  otp:
+    ttl: 5m
+    max-attempts: 5
+    resend-after: 30s
+    max-per-hour: 5
+    max-per-ip-per-hour: 20
+    dev-echo: true
+    mail-from: "Arthlane <no-reply@localhost>"
+  cors-origins:
+    - http://127.0.0.1:8765
+    - http://localhost:8765

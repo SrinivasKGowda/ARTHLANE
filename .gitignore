@@ -1,0 +1,13 @@
+.env
+share.env
+target/
+data/
+*.class
+*.log
+__pycache__/
+*.pyc
+.idea/
+*.iml
+.vscode/
+.DS_Store
+*.tgz

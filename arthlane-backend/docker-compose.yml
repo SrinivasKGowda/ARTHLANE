@@ -1,0 +1,14 @@
+services:
+  postgres:
+    image: postgres:17
+    environment:
+      POSTGRES_DB: arthlane
+      POSTGRES_USER: arthlane
+      POSTGRES_PASSWORD: arthlane-local-only
+    ports:
+      - "127.0.0.1:5432:5432"
+    volumes:
+      - arthlane-pg:/var/lib/postgresql/data
+
+volumes:
+  arthlane-pg:

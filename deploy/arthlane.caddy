@@ -1,0 +1,19 @@
+encode zstd gzip
+
+header {
+	Strict-Transport-Security "max-age=31536000"
+	X-Content-Type-Options "nosniff"
+	X-Frame-Options "DENY"
+	Referrer-Policy "strict-origin-when-cross-origin"
+	Permissions-Policy "camera=(), microphone=(), geolocation=()"
+	-Server
+}
+
+# Only the account API is public on the backend; its health and admin endpoints stay inside the server.
+handle /api/v1/* {
+	reverse_proxy {$API_UPSTREAM:api:8766}
+}
+
+handle {
+	reverse_proxy {$WEB_UPSTREAM:web:8765}
+}
